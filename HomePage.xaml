@@ -1,0 +1,27 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:sr26" 
+        x:Class="sr26.HomePage"
+        Title="SR26 Database" Height="auto" Width="auto" MinHeight="256" MinWidth="256" SizeToContent="WidthAndHeight">
+
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="37"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Margin="5" Background="LightYellow"  Orientation="Horizontal" HorizontalAlignment="Center">
+            <RadioButton Content="Browse"  x:Name="BBrowse"  Checked="BrowseOrCompare" GroupName="togg" Style="{DynamicResource RadioButton-Sketch}" Margin="0,0,10,0" Background="Lime" Foreground="Black" />
+            <RadioButton Content="Compare" x:Name="BComp"   Checked="BrowseOrCompare" GroupName="togg" Style="{DynamicResource RadioButton-Sketch}" Background="Lime" Foreground="Black" />
+        </StackPanel>
+        <HeaderedContentControl Header="Browse" Grid.Row="1" x:Name="z_browse">
+            <local:Listing  HorizontalAlignment="Stretch"  VerticalAlignment="Stretch"/>
+        </HeaderedContentControl>
+        <HeaderedContentControl  Grid.Row="1" Header="Compare" x:Name="z_compare">
+            <local:NutCompare  HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+        </HeaderedContentControl>
+       
+    </Grid>
+</Window>

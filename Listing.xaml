@@ -1,0 +1,162 @@
+﻿<UserControl
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:Themes="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero2" x:Class="sr26.Listing" 
+             mc:Ignorable="d" 
+             Height="auto" Width="auto">
+    <UserControl.Resources>
+
+
+       
+
+
+    </UserControl.Resources>
+    <Grid Margin="6">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="10"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="10"/>
+        </Grid.RowDefinitions>
+        <Rectangle Grid.Row="0" Style="{StaticResource AppRect}" />
+        <Rectangle Grid.Row="2" Style="{StaticResource AppRect}"/>
+
+        <Grid Grid.Row="1" Background="LightGray"  >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+
+            </Grid.RowDefinitions>
+            <Expander Header="Commands" ExpandDirection="Down"  Grid.Row="0" Template="{DynamicResource AppExpander}">
+                <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="42"/>
+                        <RowDefinition Height="42"/>
+                        <RowDefinition Height="42"/>
+                        <RowDefinition Height="40"/>
+                    </Grid.RowDefinitions>
+                    <Border Style="{StaticResource AppBorder}" BorderBrush="Transparent">
+                        <StackPanel Orientation="Horizontal" Height="36" HorizontalAlignment="Center">
+                            <Label Content="Groups:"  />
+                            <ComboBox Width="300" x:Name="fD_GROUPComboBox" ItemTemplate="{StaticResource DT4Group}" ItemsSource="{Binding}" SelectedValuePath="FdGrp_CD" SelectionChanged="fD_GROUPComboBox_SelectionChanged" Template="{StaticResource WinComboBox}">
+                                <ComboBox.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <VirtualizingStackPanel/>
+                                    </ItemsPanelTemplate>
+                                </ComboBox.ItemsPanel>
+
+                            </ComboBox>
+                        </StackPanel>
+                    </Border>
+                    <!-- -->
+                    <Border Style="{StaticResource AppBorder}" Grid.Row="1" BorderBrush="Transparent" >
+                        <StackPanel x:Name="SSp" Orientation="Horizontal" HorizontalAlignment="Center" Height="36">
+                            <Label Content="Keyword: "/>
+                            <TextBox x:Name="Kword" />
+                            <Button x:Name="SearchBtn" Content="Ok" Click="SearchBtn_Click" Margin="10,2,2,2" Width="36" Style="{DynamicResource AppButton}"/>
+                        </StackPanel>
+                    </Border>
+
+                    <Border Grid.Row="2" BorderBrush="Transparent" Style="{StaticResource AppBorder}">
+                        <StackPanel x:Name="BSp"  Orientation="Horizontal" HorizontalAlignment="Center" Height="36">
+                            <Label Content="Foods: "/>
+                            <ComboBox x:Name="fOOD_DESComboBox" ItemTemplate="{StaticResource DT4Food}"  ItemsSource="{Binding}" Grid.Row="2" SelectedValuePath="NDB_No" Template="{DynamicResource WinComboBox}">
+                                <ComboBox.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <VirtualizingStackPanel/>
+                                    </ItemsPanelTemplate>
+                                </ComboBox.ItemsPanel>
+                            </ComboBox>
+                            <Button x:Name="ListBtn" Content="Go" Click="ListBtn_Click" Margin="10,2,2,2" Width="36" Style="{DynamicResource AppButton}"/>
+                        </StackPanel>
+                    </Border>
+
+                    <ToggleButton Grid.Row="3" Height="24" Content="Browse" x:Name="BSBtn" Click="BSBtn_Click" HorizontalAlignment="Center"/>
+                </Grid>
+            </Expander>
+
+
+            <Expander Grid.Row="1" Header="Search" Template="{DynamicResource AppExpander}"   >
+                <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="10"/>
+                    </Grid.RowDefinitions>
+                    <TextBlock x:Name="STHead" Style="{StaticResource CenterHead}"/>
+                    <ListBox Grid.Row="1" x:Name="Lv4search" SelectionMode="Single"  ItemsSource="{Binding}"   SelectedValuePath="NDB_No" SelectionChanged="Lv4search_SelectionChanged" >
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <Border Style="{StaticResource AppBorder}">
+                                    <TextBlock Text="{Binding Long_Desc}" Style="{StaticResource TBlock}"/>
+                                </Border>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+
+                </Grid>
+            </Expander>
+
+            <Expander  Grid.Row="2" Header="Results" Template="{DynamicResource AppExpander}"   >
+                <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="10"/>
+                    </Grid.RowDefinitions>
+                    <TextBlock x:Name="BTHead" Style="{StaticResource CenterHead}"/>
+                    <ListView Grid.Row="1" ScrollViewer.PanningRatio="1"  x:Name="Lv4Nuts" SelectionMode="Single"  ItemsSource="{Binding}"      >
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn x:Name="Values" Width="90" Header="Values" >
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Border Style="{StaticResource AppBorder}">
+                                                <TextBlock  Style="{StaticResource RBlock}"  Text="{Binding Value, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
+                                            </Border>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                                <GridViewColumn x:Name="Units" Width="64" Header="Units" >
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Border Style="{StaticResource AppBorder}">
+                                                <TextBlock  Style="{StaticResource CenterHead}" Text="{Binding Units, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
+                                            </Border>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                                <GridViewColumn x:Name="Nutrient"  Header="Nutrient" Width="320" >
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Border Style="{StaticResource AppBorder}">
+                                                <TextBlock   Style="{StaticResource TBlock}" Text="{Binding Nutrient, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
+                                            </Border>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                            </GridView>
+                        </ListView.View>
+                        <ListView.ItemContainerStyle>
+                            <Style>
+                                <Setter Property="Control.HorizontalContentAlignment" Value="Stretch"/>
+                                <Setter Property="Control.VerticalContentAlignment" Value="Stretch"/>
+                                <Setter Property="FrameworkElement.HorizontalAlignment" Value="Stretch"/>
+                                <Style.Triggers>
+                                    <Trigger Property="Selector.IsSelected" Value="true">
+                                        <Setter Property="Control.Background" Value="Magenta"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </ListView.ItemContainerStyle>
+                    </ListView>
+
+                </Grid>
+            </Expander>
+
+
+        </Grid>
+    </Grid>
+</UserControl>
